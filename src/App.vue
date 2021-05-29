@@ -1,11 +1,24 @@
 <template>
-  <div id="app"></div>
+  <div id="app">to vivo</div>
 </template>
 
 <script>
-//import axios from 'axios'
+import axios from "axios";
 export default {
   name: "App",
+  data() {
+    return {
+      pokemons: [],
+    };
+  },
+  created: function () {
+    axios
+      .get("https://pokeapi.co/api/v2/pokemon?limit=151&offset=0")
+      .then((res) => {
+        console.log("Dados recebidos");
+        this.pokemons = res.data.results;
+      });
+  },
 };
 </script>
 
