@@ -1,14 +1,40 @@
 <template>
   <div class="pokemon">
     <div class="card">
-      <div class="card-image">
-        <figure>
+      <div class="card-image column is-half is-offset-one-quarter">
+        <figure class="image is-128x128 column is-half is-offset-one-quarter">
           <img :src="currentImg" alt="Placeholder image" />
         </figure>
       </div>
       <div class="card-content">
         <div class="media">
-          <div class="media-content">
+          <div class="media-left is-1">
+            <p>HP - {{ this.pokemon.hp }}</p>
+            <progress
+              class="progress is-primary"
+              :value="this.pokemon.hp"
+              max="300"
+            >
+              HP
+            </progress>
+            <p>ATTACK - {{ this.pokemon.attack }}</p>
+            <progress
+              class="progress is-danger"
+              :value="this.pokemon.attack"
+              max="300"
+            >
+              ATTACK
+            </progress>
+            <p>DEFENSE - {{ this.pokemon.defense }}</p>
+            <progress
+              class="progress is-info is-"
+              :value="this.pokemon.defense"
+              max="300"
+            >
+              DEFENSE
+            </progress>
+          </div>
+          <div class="media-content is-11">
             <p class="title is-4">{{ num }} - {{ name | upper }}</p>
             <p class="subtitle is-6">{{ pokemon.type }}</p>
           </div>
@@ -33,6 +59,9 @@ export default {
       this.pokemon.type = res.data.types[0].type.name;
       this.pokemon.front = res.data.sprites.front_default;
       this.pokemon.back = res.data.sprites.back_default;
+      this.pokemon.hp = res.data.stats[0].base_stat;
+      this.pokemon.attack = res.data.stats[1].base_stat;
+      this.pokemon.defense = res.data.stats[2].base_stat;
       this.currentImg = this.pokemon.front;
     });
   },
@@ -44,6 +73,9 @@ export default {
         type: "",
         front: "",
         back: "",
+        hp: 0,
+        attack: 0,
+        defense: 0,
       },
     };
   },
