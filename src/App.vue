@@ -48,8 +48,8 @@ export default {
       if (this.busca === "" || this.busca == " ") {
         this.filteredPokemons = this.pokemons;
       } else {
-        this.filteredPokemons = this.pokemons.filter(
-          (pokemon) => pokemon.name == this.busca
+        this.filteredPokemons = this.pokemons.filter((pokemon) =>
+          pokemon.name.match(this.busca.toLocaleLowerCase())
         );
       }
     },
