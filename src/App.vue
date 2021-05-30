@@ -1,7 +1,17 @@
 <template>
   <div id="app">
     <div class="column is-half is-offset-one-quarter">
-      <div v-for="(poke, index) in pokemons" :key="index">
+      <p class="is-size-1 has-text-weight-bold is-family-code mb-5">Pokedex</p>
+      <input
+        class="input is-primary"
+        type="text"
+        placeholder="Buscar pokemon pelo nome"
+        v-model="busca"
+        @change="buscar"
+      />
+      <button class="button is-primary mt-2" @click="buscar">Procurar</button>
+
+      <div v-for="(poke, index) in filteredPokemons" :key="poke.name">
         <Pokemon :name="poke.name" :url="poke.url" :num="index + 1" />
       </div>
     </div>
@@ -16,6 +26,8 @@ export default {
   data() {
     return {
       pokemons: [],
+      busca: "",
+      filteredPokemons: [],
     };
   },
   created: function () {
@@ -24,10 +36,32 @@ export default {
       .then((res) => {
         console.log("Dados recebidos");
         this.pokemons = res.data.results;
+        this.filteredPokemons = res.data.results;
       });
   },
   components: {
     Pokemon,
+  },
+  methods: {
+    buscar: function () {
+      this.filteredPokemons = this.pokemons;
+      if (this.busca === "" || this.busca == " ") {
+        this.filteredPokemons = this.pokemons;
+      } else {
+        this.filteredPokemons = this.pokemons.filter(
+          (pokemon) => pokemon.name == this.busca
+        );
+      }
+    },
+  },
+  computed: {
+    /*resultadoBusca: function () {
+      if (this.busca === "" || this.busca == " ") {
+        return this.pokemons;
+      } else {
+        return this.pokemons.filter((pokemon) => pokemon.name == this.busca);
+      }
+    },*/
   },
 };
 </script>
@@ -39,6 +73,17 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  background: #fc4a1a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #f7b733,
+    #fc4a1a
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #f7b733,
+    #fc4a1a
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  height: 100%;
 }
 </style>
