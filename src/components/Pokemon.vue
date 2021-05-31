@@ -7,36 +7,39 @@
         </figure>
       </div>
       <div class="card-content">
-        <div class="media">
+        <div class="media mt-5">
           <div class="media-left is-1">
-            <p>HP - {{ this.pokemon.hp }}</p>
+            <p style="float: left">HP - {{ this.pokemon.hp }}</p>
             <progress
               class="progress is-primary"
               :value="this.pokemon.hp"
-              max="300"
+              max="200"
             >
               HP
             </progress>
-            <p>ATTACK - {{ this.pokemon.attack }}</p>
+            <p style="float: left">ATTACK - {{ this.pokemon.attack }}</p>
             <progress
               class="progress is-danger"
               :value="this.pokemon.attack"
-              max="300"
+              max="200"
             >
               ATTACK
             </progress>
-            <p>DEFENSE - {{ this.pokemon.defense }}</p>
+            <p style="float: left">DEFENSE - {{ this.pokemon.defense }}</p>
             <progress
               class="progress is-info is-"
               :value="this.pokemon.defense"
-              max="300"
+              max="200"
             >
               DEFENSE
             </progress>
           </div>
-          <div class="media-content is-11">
-            <p class="title is-4">{{ num }} - {{ name | upper }}</p>
+          <div class="media-content is-10">
+            <p class="title is-4">{{ name | upper }}</p>
             <p class="subtitle is-6">{{ pokemon.type }}</p>
+          </div>
+          <div class="media-right is-1">
+            <div id="divCheckbox" style="visibility: hidden">TESTE</div>
           </div>
         </div>
 
@@ -107,5 +110,10 @@ export default {
 <style>
 .pokemon {
   margin-top: 10px;
+}
+
+#divCheckbox {
+  visibility: hidden;
+  width: 107px;
 }
 </style>

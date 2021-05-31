@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <button class="back" @click="backTop">Topo</button>
     <div class="column is-half is-offset-one-quarter">
       <p class="is-size-1 has-text-weight-bold is-family-code mb-5">Pokedex</p>
       <input
@@ -53,6 +54,9 @@ export default {
         );
       }
     },
+    backTop: function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
   },
   computed: {
     /*resultadoBusca: function () {
@@ -85,5 +89,20 @@ export default {
     #fc4a1a
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   height: 100%;
+}
+
+.back {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  float: right;
+  position: fixed;
+  margin: 200px;
+  background-color: #0a0a0a;
+  border-color: transparent;
+  color: white;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
 }
 </style>
